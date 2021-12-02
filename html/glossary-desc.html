@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <style>
+            * {
+                margin: 0;
+            }
+
+            body {
+                background-color: #222;
+            }
+
+            #status-bar {
+                background-color: #ccc;
+                height: 50px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+            }
+
+            #status-bar button {
+                border: 0;
+                background-color: transparent;
+                margin: 0 15px;
+                cursor: pointer;
+            }
+
+            #glossary {
+                font-family: Arial, Helvetica, sans-serif;
+                color: white;
+                font-size: 15px;
+                margin: 10px;
+            }
+
+            #glossary .header {
+                margin: 20 0;
+                padding-bottom: 10px;
+                border-bottom: 1px solid black;
+            }
+
+            #glossary .header h2 {
+                font-size: 15px;
+                color: gray;
+            }
+
+            #glossary p {
+                line-height: 20px;
+                color: white;
+                font-size: 15px;
+            }
+            
+        </style>
+    </head>
+
+    <body>
+        <div id="status-bar">
+            <button id="menu-btn">
+                <img height="25" src="https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-menu-512.png" />
+            </button>
+            <button id="back-btn">
+                <img height="25" src="http://cdn.onlinewebfonts.com/svg/img_259786.png" />
+            </button>
+        </div>
+        <div id="glossary"></div>
+    </body>
+
+    <script>
+        document.getElementById("menu-btn").onclick = () => window.location.href = "app.html";
+        document.getElementById("back-btn").onclick = () => window.location.href = "glossary.html";
+
+        const glossary = document.getElementById("glossary");
+
+        const data = [
+            {
+                id: 1, 
+                name: 'Adenomegalia', 
+                type: 'Condição', 
+                description: 'Linfonodos ou gânglios aumentados, também conhecidos como ínguas.',
+                content: 'Adenomegalia é o aumento dos linfonodos (ínguas). Pode estar presente em crianças e, na maior parte dos casos, é causada por infecções virais. Mais raramente podem ser causadas por doenças oncológicas tais como leucemias ou linfomas.'
+            },
+            {
+                id: 2, 
+                name: 'Alopécia', 
+                type: 'Condição', 
+                description: 'Queda de cabelos',
+                content: 'A alopécia é a perda de cabelos do couro cabeludo ou de qualquer outra região do corpo. Em crianças em tratamento oncológico (quimioterapia ou radioterapia) a queda do cabelo pode acontecer. Nestes casos, uma vez terminado o tratamento o cabelo volta a crescer.'
+            }
+        ]
+
+        const id = window.location.href.split('?')[1].split('=')[1];
+        const glossaryItem = data.find(item => item.id == id);
+
+        glossary.innerHTML = "";
+        glossary.innerHTML += `
+            <div id="glossary">
+                <div class="header">
+                    <h1>${glossaryItem.name}</h1>
+                    <h2>${glossaryItem.type}</h2>
+                </div>
+                <p>
+                    ${glossaryItem.description}
+                </p>
+            </div>
+        `;
+    </script>
+</html>

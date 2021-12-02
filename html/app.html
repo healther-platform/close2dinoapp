@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <style>
+            * {
+                margin: 0;
+            }
+
+            body {
+                background-color: #444;
+            }
+
+            #status-bar {
+                background-color: #ccc;
+                height: 50px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+            }
+
+            #status-bar button {
+                border: 0;
+                background-color: transparent;
+                margin: 0 15px;
+                cursor: pointer;
+            }
+
+            #items a {
+                background-color: #18bfa0;
+                text-decoration: none;
+                padding: 20px;
+                display: block;
+                text-align: center;
+                font-weight: bold;
+                font-size: 20px;
+                font-family: Arial;
+                color: purple;
+            }
+
+            #items a:visited {
+                color: purple;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="status-bar">
+            <button id="menu-btn">
+                <img height="25" src="https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-menu-512.png" />
+            </button>
+        </div>
+        <div id="items">
+            <a href="glossary.html">Glossário</a>
+        </div>
+    </body>
+
+    <script>
+        document.getElementById("menu-btn").onclick = () => window.location.href = "app.html";
+     
+        
+    </script>
+</html>
