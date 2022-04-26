@@ -1,0 +1,52 @@
+<ion-content>
+    <body>
+        <div id="status-bar">
+            <div class="left">
+                <button id="menu-btn">
+                    <img src="https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-menu-512.png" width="25"
+                        height="25">
+                 
+                </button>
+                <button id="back-btn">
+                    <img src="http://cdn.onlinewebfonts.com/svg/img_259786.png" width="25" height="25">
+             
+                </button>
+            </div>
+            <div class="right">
+                <button id="reload-btn">
+                    <img src="http://cdn.onlinewebfonts.com/svg/img_209352.png" width="25" height="25">
+               
+                </button>
+            </div>
+        </div>
+        <div id="search">
+            <input type="text" placeholder="Buscar..." [(ngModel)]="input_search" />
+        </div>
+        <div id="faq">
+            <h1>Faq</h1>
+            <div id="faq-content"></div>
+            <div class="faq-footer">
+                <button class="send-question" id="_12345">
+                    Não encontrou sua pergunta?
+                </button>
+            </div>
+
+            <div class="modal" id="modal-pergunta">
+                <div class="modal-area">
+                    <div class="header">
+                        <h2>Janela Modal</h2>
+                        <img height="30" src="https://www.imagensempng.com.br/wp-content/uploads/2021/05/06-2.png" alt="icon" />
+                    </div>
+                    <div class="body">
+                        <h3>Mande para os profissionais!</h3>
+                        <input id="pergunta-input" type="text" placeholder="Pergunta*" [(ngModel)]="input_pergunta" />
+                    </div>
+                    <div class="footer">
+                        <button id="_56754">Cancelar</button>
+                        <button id="_32132">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</ion-content>

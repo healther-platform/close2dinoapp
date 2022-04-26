@@ -158,7 +158,7 @@
                 }
     
                 #glossary-content .item .item-content p {
-                    margin: 20 0;
+                    margin: 20px 0;
                 }
     
                 #glossary-content .item .item-content a {
@@ -204,12 +204,12 @@
                     for (let item of data) {
                         if (item.name.toLowerCase().startsWith(name.toLowerCase())) {
                             glossaryContent.innerHTML += `
-                            <div class="item" onclick= "() => openDescription(${items[i]});">
+                            <div class="item" onclick= "() => openDescription(item);">
                                 <h2>${item.name}</h2>
                                 <div class="item-content">
                                     <h3>${item.type}</h3>
                                     <p>${item.description}</p>
-                                    <a href="mobilang:screen:glossary-desc.html?id=${item.id}">Leia mais</a>
+                                    <a href="mobilang:screen:glossary-desc?id=${item.id}">Leia mais</a>
                                 </div>
                             </div>
                             `;
@@ -318,7 +318,7 @@
                     }
                 ]
 
-                const id = window.location.href.split('?')[1].split('=')[1];
+                const id = mobilang:param:id;
                 const glossaryItem = data.find(item => item.id == id);
 
                 glossary.innerHTML = "";

@@ -63,27 +63,27 @@ font-size: 15px;
 
 const GlossaryDescScreen = (props) => {
 
-    const data = [
-        {
-            id: 1,
-            name: 'Adenomegalia',
-            type: 'Condição',
-            description: 'Linfonodos ou gânglios aumentados, também conhecidos como ínguas.',
-            content: 'Adenomegalia é o aumento dos linfonodos (ínguas). Pode estar presente em crianças e, na maior parte dos casos, é causada por infecções virais. Mais raramente podem ser causadas por doenças oncológicas tais como leucemias ou linfomas.'
-        },
-        {
-            id: 2,
-            name: 'Alopécia',
-            type: 'Condição',
-            description: 'Queda de cabelos',
-            content: 'A alopécia é a perda de cabelos do couro cabeludo ou de qualquer outra região do corpo. Em crianças em tratamento oncológico (quimioterapia ou radioterapia) a queda do cabelo pode acontecer. Nestes casos, uma vez terminado o tratamento o cabelo volta a crescer.'
-        }
-    ]
-
     const [glossary, setGlossary] = useState([]);
 
     useEffect(() => {
-        const id = props.route.params.id
+		const data = [
+		    {
+		        id: 1,
+		        name: 'Adenomegalia',
+		        type: 'Condição',
+		        description: 'Linfonodos ou gânglios aumentados, também conhecidos como ínguas.',
+		        content: 'Adenomegalia é o aumento dos linfonodos (ínguas). Pode estar presente em crianças e, na maior parte dos casos, é causada por infecções virais. Mais raramente podem ser causadas por doenças oncológicas tais como leucemias ou linfomas.'
+		    },
+		    {
+		        id: 2,
+		        name: 'Alopécia',
+		        type: 'Condição',
+		        description: 'Queda de cabelos',
+		        content: 'A alopécia é a perda de cabelos do couro cabeludo ou de qualquer outra região do corpo. Em crianças em tratamento oncológico (quimioterapia ou radioterapia) a queda do cabelo pode acontecer. Nestes casos, uma vez terminado o tratamento o cabelo volta a crescer.'
+		    }
+		]
+        //const id = props.route.params.id 
+        const id = props.route.params.query.split("?")[1].split("=")[1] // vem como ?id=...
         const glossaryItem = data.find(item => item.id == id);
         let _glossary = []
         _glossary.push(

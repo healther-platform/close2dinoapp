@@ -15,6 +15,24 @@
                 width: 100%;
                 display: flex;
                 align-items: center;
+                justify-content: space-between;
+            }
+            
+            #status-bar .left,
+            #status-bar .right  {
+                flex: 1;
+            }
+            
+            #status-bar .right  {
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            #status-bar button {
+                border: 0;
+                background-color: transparent;
+                margin: 0 15px;
+                cursor: pointer;
             }
 
             #status-bar button {
@@ -90,12 +108,23 @@
 
     <body>
         <div id="status-bar">
-            <button id="menu-btn">
-                <img height="25" src="https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-menu-512.png" />
-            </button>
-            <button id="back-btn">
-                <img height="25" src="http://cdn.onlinewebfonts.com/svg/img_259786.png" />
-            </button>
+            <div class="left">
+                <button id="menu-btn">
+                    <img src="https://cdn0.iconfinder.com/data/icons/heroicons-ui/24/icon-menu-512.png" width="25"
+                        height="25">
+                    </img>
+                </button>
+                <button id="back-btn">
+                    <img src="http://cdn.onlinewebfonts.com/svg/img_259786.png" width="25" height="25">
+                    </img>
+                </button>
+            </div>
+            <div class="right">
+                <button id="reload-btn">
+                    <img src="http://cdn.onlinewebfonts.com/svg/img_209352.png" width="25" height="25">
+                    </img>
+                </button>
+            </div>
         </div>
         <div id="search">
             <input type="text" placeholder="Buscar..." />
@@ -109,15 +138,16 @@
     <script>
         document.getElementById("menu-btn").onclick = () => window.location.href = "app.html";
         document.getElementById("back-btn").onclick = () => window.location.href = "app.html";
-     
-        function openDescription(item) {
-            item.children[1].classList.toggle("item-content-open");
+        document.getElementById("reload-btn").onclick = () => window.location.reload();
+
+        function openDescription(itemId) {
+            const glossaryContent = document.getElementById("glossary-content");
+            glossaryContent.children[itemId].children[1].classList.toggle("item-content-open");
         }
 
-        // --------------------------------------
-        const glossaryContent = document.getElementById("glossary-content");
+        
 
-        const data = [
+        /*const data = [
             {
                 id: 1, 
                 name: 'Adenomegalia', 
@@ -132,34 +162,40 @@
                 description: 'Queda de cabelos',
                 content: 'A alopécia é a perda de cabelos do couro cabeludo ou de qualquer outra região do corpo. Em crianças em tratamento oncológico (quimioterapia ou radioterapia) a queda do cabelo pode acontecer. Nestes casos, uma vez terminado o tratamento o cabelo volta a crescer.'
             }
-        ]
+        ]*/
 
-        function loadGlossaryWithName(name='') {
-            glossaryContent.innerHTML = "";
-            for (let item of data) {
-                if (item.name.toLowerCase().startsWith(name.toLowerCase())) {
-                    glossaryContent.innerHTML += `
-                    <div class="item" onclick= "() => openDescription(${items[i]});">
-                        <h2>${item.name}</h2>
-                        <div class="item-content">
-                            <h3>${item.type}</h3>
-                            <p>${item.description}</p>
-                            <a href="glossary-desc.html?id=${item.id}">Leia mais</a>
-                        </div>
-                    </div>
-                    `;
+        fetch('http://192.168.0.62:8080/glossary')
+        .then(res => {
+            res.json()
+            .then(data => {
+                function loadGlossaryWithName(name='') {
+                    const glossaryContent = document.getElementById("glossary-content");
+                    glossaryContent.innerHTML = "";
+                    for (let i in data) {
+                        let item = data[i];
+
+                        if (item.name.toLowerCase().startsWith(name.toLowerCase())) {
+                            glossaryContent.innerHTML += `
+                            <div class="item" >
+                                <h2 onClick="openDescription(${i})">${item.name}</h2>
+                                <div class="item-content">
+                                    <h3>${item.type}</h3>
+                                    <p>${item.description}</p>
+                                    <a href="glossary-desc.html?id=${item.id}">Leia mais</a>
+                                </div>
+                            </div>
+                            `;
+                        }
+                    }
                 }
-            }
+        
+                loadGlossaryWithName();
 
-            makeGlossaryItemsClickable();
-        }
-
-        loadGlossaryWithName();
-
-        // --------------------------------------
-        const searchInput = document.getElementById("search").children[0];
-        searchInput.addEventListener('keyup', (event) => {
-            loadGlossaryWithName(searchInput.value);
-        })
+                const searchInput = document.getElementById("search").children[0];
+                searchInput.addEventListener('keyup', (event) => {
+                    loadGlossaryWithName(searchInput.value);
+                })
+            })
+        });
     </script>
 </html>

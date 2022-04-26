@@ -1,0 +1,7 @@
+{
+  "name": "close2dinoapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
